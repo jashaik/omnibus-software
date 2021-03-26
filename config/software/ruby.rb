@@ -111,7 +111,7 @@ build do
   patch_env["PATH"] = "/opt/freeware/bin:#{env["PATH"]}" if aix?
 
   # remove the warning that the win32 api is going away.
-  if windows?
+  if windows? && version.satisifes?("< 3.0")
     patch source: "ruby-win32_warning_removal.patch", plevel: 1, env: patch_env
   end
 
