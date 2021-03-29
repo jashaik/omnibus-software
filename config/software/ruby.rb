@@ -199,8 +199,8 @@ build do
     # AIX has issues with ssl retries, need to patch to have it retry
     patch source: "ruby_aix_ssl_EAGAIN.patch", plevel: 1, env: patch_env
     # the next two patches are because xlc doesn't deal with long vs int types well
-    patch source: "ruby-aix-atomic.patch", plevel: 1, env: patch_env
-    patch source: "ruby-aix-vm-core.patch", plevel: 1, env: patch_env
+    patch source: "ruby-aix-atomic.patch", plevel: 1, env: patch_env if version.satisfies("< 3.0")
+    patch source: "ruby-aix-vm-core.patch", plevel: 1, env: patch_env if version.satisfies("< 3.0")
 
     # per IBM, just enable pthread
     configure_command << "--enable-pthread"
