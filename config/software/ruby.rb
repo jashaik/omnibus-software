@@ -179,7 +179,7 @@ build do
   # Ruby 3.0.0 (but probably not any ruby version after that) needs this patch
   # to enable using clang.  This patch has been marged to master.
   #
-  if version.satisfies?("~> 3.0.0")
+  if version.satisfies?(">= 3.0.0")
     patch source: "ruby-3.0.0-fdeclspec.patch", plevel: 1, env: patch_env
   end
 
