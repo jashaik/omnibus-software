@@ -176,6 +176,13 @@ build do
   # Also, fix paths emitted in the makefile on windows on both msys and msys2.
   patch source: "ruby-mkmf.patch", plevel: 1, env: patch_env
 
+  # Ruby 3.0.0 (but probably not any ruby version after that) needs this patch
+  # to enable using clang.  This patch has been marged to master.
+  #
+  if version.satisfies?("~> 3.0.0")
+    patch source: "ruby-3.0.0-fdeclspec.patch", plevel: 1, env: patch_env
+  end
+
   configure_command = ["--with-out-ext=dbm,readline",
                        "--enable-shared",
                        "--disable-install-doc",
